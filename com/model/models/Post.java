@@ -1,24 +1,33 @@
 package com.model.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
+//import com.model.models.User;
 
 public class Post{
+
+	private static int postId = 100;
 	
-	private int postId = 100;
-	
-	private User user;
+	private String userName;
 	
 	private String imageUrl;
-	
+
 	private String caption;
 	
 	private Set<Like> likes;
 	
 	private Map<Integer, Comment> comments;
 	
-	private LocalDate postedAt;
+	private LocalDateTime postedAt;
+	
+	public Post(String userName, String imageUrl, String caption, LocalDateTime postedAt) {
+		this.userName = userName;
+		this.imageUrl = imageUrl;
+		this.caption = caption;
+		this.postedAt = postedAt;
+		postId++;
+	}
 	
 	public int getPostId(){
 		return postId;
@@ -60,12 +69,20 @@ public class Post{
 		comments.put(commentId, c);
 	}
 	
-	public LocalDate getPostedAt(){
+	public LocalDateTime getPostedAt(){
 		return postedAt;
 	}
 	
-	public void setPostedAt(LocalDate postedAt){
+	public void setPostedAt(LocalDateTime postedAt){
 		this.postedAt = postedAt;
 	}
 	
+	public String getUserName(){
+		return userName;
+	}
+
+	public String toString() {
+		return "Post" + "\n userName: " + userName + "\n image: " + imageUrl + "\n caption : " + caption + "\n likes : " + likes
+				+ "\n comments: " + comments + "\n postedAt: " + postedAt + "\n postID: " + postId;
+	}
 }

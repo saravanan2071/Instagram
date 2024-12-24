@@ -1,5 +1,7 @@
 package com.model.models;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -22,7 +24,7 @@ public  class User{
 	
 	private Gender gender;
 	
-	private Map<Integer, Post> post;
+	private Map<Integer, Post> post = new HashMap<>();
 	
 	
 	public int hashCode() {
@@ -119,17 +121,15 @@ public  class User{
 	public Post getPost(int postId){
 		return post.get(postId);
 	}
+
+	public Collection<Post> getPost(Integer uid){
+
+		Collection<Post> p = post.values();
+		return p;
+	}
 	
 	public void setPost(int postId, Post p){
 		post.put(postId, p);
-	}
-
-	public Map<Integer, Post> getPost() {
-		return post;
-	}
-
-	public void setPost(Map<Integer, Post> post) {
-		this.post = post;
 	}
 	
 	public String toString() {
