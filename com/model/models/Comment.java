@@ -1,5 +1,7 @@
 package com.model.models;
 
+import java.time.LocalDate;
+
 public class Comment{
 	
 		private int commentId;
@@ -10,7 +12,7 @@ public class Comment{
 		
 		private String comment;
 		
-		private Date commentedAt;
+		private LocalDate commentedAt;
 		
 		public int getCommentId(){
 			return commentId;
@@ -44,11 +46,11 @@ public class Comment{
 			this.comment = comment;
 		}
 		
-		public Date geCommentedAt(){
+		public LocalDate geCommentedAt(){
 			return commentedAt;
 		}
 		
-		public void setCommentdAt(Date commentedAt){
+		public void setCommentdAt(LocalDate commentedAt){
 			this.commentedAt = commentedAt;
 		}
 		

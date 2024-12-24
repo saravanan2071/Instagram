@@ -1,12 +1,13 @@
 package com.model.interfaces;
+import com.model.models.User;
 
-interface UserService{
+public interface UserService{
 	
-	User login(String userName, String password);
+	void login(String userName, String password);
 	
-	User createAccount(User user);
+	void createAccount(User user);
 	
-	boolean deletUser(String userName, int userId, String password);
+	void deletUser(String userName, String password);
 	
 	boolean getUserSession(String userName);
 	
