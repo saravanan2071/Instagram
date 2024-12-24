@@ -1,5 +1,7 @@
 package com.model.models;
 
+import java.time.LocalDate;
+
 public  class Like{
 	
 	private int likeId;
@@ -8,7 +10,7 @@ public  class Like{
 	
 	private int postId;
 	
-	private Date likedAt;
+	private LocalDate likedAt;
 	
 	public int getLikeId(){
 		return likeId;
@@ -34,11 +36,11 @@ public  class Like{
 		this.postId = postId;
 	}
 	
-	public Date getLikedAt(){
+	public LocalDate getLikedAt(){
 		return likedAt;
 	}
 	
-	public void setLikedAt(Date likedAt){
+	public void setLikedAt(LocalDate likedAt){
 		this.likedAt = likedAt;
 	}
 	

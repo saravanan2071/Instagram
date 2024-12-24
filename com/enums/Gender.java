@@ -1,5 +1,5 @@
 package com.enums;
 
-enum Gender{
-	
+public enum Gender{
+	MALE,FEMALE,OTHER
 }

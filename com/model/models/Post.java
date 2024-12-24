@@ -1,8 +1,12 @@
 package com.model.models;
 
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.Set;
+
 public class Post{
 	
-	private int postId;
+	private int postId = 100;
 	
 	private User user;
 	
@@ -14,14 +18,14 @@ public class Post{
 	
 	private Map<Integer, Comment> comments;
 	
-	private Date postedAt;
+	private LocalDate postedAt;
 	
 	public int getPostId(){
 		return postId;
 	}
 	
 	public void setPostId(){
-		this.postId = user.post.size()+1;
+		postId += 1;
 	}
 	
 	public String getImageUrl(){
@@ -37,7 +41,7 @@ public class Post{
 	}
 	
 	public void setCaption(String caption){
-		this.caption = caption:
+		this.caption = caption;
 	}
 	
 	public Set<Like> getLikes(){
@@ -56,11 +60,11 @@ public class Post{
 		comments.put(commentId, c);
 	}
 	
-	public Date getPostedAt(){
+	public LocalDate getPostedAt(){
 		return postedAt;
 	}
 	
-	public void setPostedAt(Date postedAt){
+	public void setPostedAt(LocalDate postedAt){
 		this.postedAt = postedAt;
 	}
 	
