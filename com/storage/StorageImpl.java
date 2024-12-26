@@ -5,13 +5,12 @@ import com.model.models.User;
 
 public class StorageImpl implements Storage{
 
-	
-	User user;
+	public static Map<Integer, User> users = new HashMap<>();
+
 	public Map<Integer, User> get() 
 	{		
 		return users;
 	}
-	
 	
 	public void set(Integer uid, User u) 
 	{

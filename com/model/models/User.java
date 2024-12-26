@@ -1,6 +1,5 @@
 package com.model.models;
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -37,8 +36,6 @@ public  class User{
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		User other = (User) obj;
 		return Objects.equals(email, other.email) && Objects.equals(phoneNumber, other.phoneNumber)
 				&& Objects.equals(userName, other.userName);
@@ -47,20 +44,20 @@ public  class User{
 	
 	public User(String name, String phoneNumber, String email, LocalDate dateOfBirth, String userName, String password, Gender gender) {
 					
-        this.name = name;
+		this.name = name;
 		
-        this.phoneNumber = phoneNumber;
+		this.phoneNumber = phoneNumber;
 		
-        this.email = email;
+		this.email = email;
 		
-        this.dateofBirth = dateOfBirth;
+		this.dateofBirth = dateOfBirth;
 		
-        this.userName = userName;
+		this.userName = userName;
 		
-        this.password = password;
+		this.password = password;
 		
-        this.gender = gender;
-    }
+		this.gender = gender;
+	}
 	
 	public String getName(){
 		return name;
@@ -118,17 +115,15 @@ public  class User{
 		this.gender  = gender;
 	}
 	
-	public Post getPost(int postId){
+	public Post getPost(Integer postId){
 		return post.get(postId);
 	}
 
-	public Collection<Post> getPost(Integer uid){
-
-		Collection<Post> p = post.values();
-		return p;
+	public Map<Integer, Post> getPost(){
+		return post;
 	}
-	
-	public void setPost(int postId, Post p){
+
+	public void setPost(Integer postId, Post p){
 		post.put(postId, p);
 	}
 	
@@ -137,6 +132,5 @@ public  class User{
 		return "UserName : " + this.userName + "\n" + "Post : " + post;
 		
 	}
-
 	
 }
