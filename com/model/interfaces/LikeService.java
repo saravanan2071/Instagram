@@ -3,13 +3,14 @@ package com.model.interfaces;
 import java.util.Set;
 
 import com.model.models.Like;
+import com.model.models.Post;
 
-interface LikeService{
+public interface LikeService{
 
-	void like(int userId, int postId);
+	void like(Like like);
 	
-	void dislike(int userId, int postId);
+	void dislike(Like like);
 	
-	Set<Like> get();
+	void get(Post post);
 	
 }

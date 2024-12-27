@@ -1,19 +1,17 @@
 package com.model.interfaces;
 
-import java.util.List;
+import java.util.Map;
+
 import com.model.models.Post;
-//import com.model.models.User;
 
 public interface PostService{
 	
 	void post(Post post);
 	
-	boolean delete(int userId, int postId);
+	void delete(String userName, Integer postId);
 	
-	boolean delete(int userId);
+	void delete(String userName);
 	
-	Post get (int userId, int postId);
-	
-	void get(String userName);
+	Map<Integer, Post> get(String userName);
 	
 }

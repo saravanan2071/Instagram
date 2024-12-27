@@ -2,12 +2,13 @@ package com.model.models;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Set;
-//import com.model.models.User;
+import java.util.*;
 
 public class Post{
 
-	private static int postId = 100;
+	private static int postCounter = 100;
+
+	private final int postId;
 	
 	private String userName;
 	
@@ -15,26 +16,22 @@ public class Post{
 
 	private String caption;
 	
-	private Set<Like> likes;
+	private Set<Like> likes = new HashSet<>();
 	
-	private Map<Integer, Comment> comments;
+	private Map<Integer, Comment> comments = new HashMap<>();
 	
 	private LocalDateTime postedAt;
 	
-	public Post(String userName, String imageUrl, String caption, LocalDateTime postedAt) {
+	public Post(String userName, String imageUrl, String caption) {
 		this.userName = userName;
 		this.imageUrl = imageUrl;
 		this.caption = caption;
-		this.postedAt = postedAt;
-		postId++;
+		this.postedAt = LocalDateTime.now();
+		postId = postCounter++;
 	}
 	
 	public int getPostId(){
 		return postId;
-	}
-	
-	public void setPostId(){
-		postId += 1;
 	}
 	
 	public String getImageUrl(){
@@ -57,15 +54,19 @@ public class Post{
 		return likes;
 	}
 	
-	public void setLike(Like l){
-		likes.add(l);
+	public void setLike(Like like){
+		likes.add(like);
+	}
+
+	public int getLikesCount(){
+		return likes.size();
 	}
 	
 	public Map<Integer, Comment> getComments(){
 		return comments;
 	}
 	
-	public void setComments(int commentId, Comment c){
+	public void setComments(Integer commentId, Comment c){
 		comments.put(commentId, c);
 	}
 	
@@ -73,16 +74,12 @@ public class Post{
 		return postedAt;
 	}
 	
-	public void setPostedAt(LocalDateTime postedAt){
-		this.postedAt = postedAt;
-	}
-	
 	public String getUserName(){
 		return userName;
 	}
 
 	public String toString() {
-		return "Post" + "\n userName: " + userName + "\n image: " + imageUrl + "\n caption : " + caption + "\n likes : " + likes
-				+ "\n comments: " + comments + "\n postedAt: " + postedAt + "\n postID: " + postId;
+		return "\n userName: " + userName + "\n image: " + imageUrl + "\n caption : " + caption + "\n likes : " + likes.size()
+				+ "\n comments: " + comments.size() + "\n postedAt: " + postedAt + "\n postID: " + getPostId() + "\n" + "\n";
 	}
 }

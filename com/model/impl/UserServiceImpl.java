@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 				Integer k=0;
 			
 				// fethching the user data's with help of username to check the credentials
-				for(Map.Entry<Integer, User> e : db.get().entrySet()) 
+				for(Map.Entry<Integer, User> e : StorageImpl.users.entrySet()) 
 				{
 					User u = e.getValue();
 					if(u.getUserName().equals(userName) && u.getPassword().equals(password)) 
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
         boolean isEqual = false;
 
 		// to store the user directly when the DB is empty
-        if(Storage.users.isEmpty()){
+        if(StorageImpl.users.isEmpty()){
             db.set(userID, user);
 			userID++;
 			System.out.println(user.getUserName() + ", Account created successfully...");
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService{
         else{
 
 			// check the user whether the user details are already exist
-            for(Entry<Integer, User> existing: db.get().entrySet()){
+            for(Entry<Integer, User> existing: StorageImpl.users.entrySet()){
 
                 User u = existing.getValue();
 
@@ -106,9 +106,10 @@ public class UserServiceImpl implements UserService{
 		String un = "";
 		String pswd = "";
 		Integer k = 0;
-			
+
+		//  check the usersession	
 		if(getUserSession(userName)){
-            for(Map.Entry<Integer, User> e : db.get().entrySet()) 
+            for(Map.Entry<Integer, User> e : StorageImpl.users.entrySet()) 
 		    {
 			    User u = e.getValue();
 			
@@ -121,6 +122,7 @@ public class UserServiceImpl implements UserService{
 			    }
 		    }
 			
+			// validate the credentials
             if(un.equals(userName) && pswd.equals(password)) 
             {
                 db.get().remove(k);
@@ -143,7 +145,7 @@ public class UserServiceImpl implements UserService{
 	// Logic for Tracking User Session
 	public boolean getUserSession(String userName)
 	{	
-		return userSession.get(userName);
+		return userSession.getOrDefault(userName, false);
 	}
 
 }

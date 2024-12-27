@@ -1,57 +1,60 @@
 package com.model.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Comment{
-	
-		private int commentId;
+
+		// cmnt = comment
+
+		private static Integer cmntCounter = 200;
+
+		private final Integer cmntId;
 		
-		private int commenterId;
+		private Integer postId;
+
+		private String postedUserName;
 		
-		private int postId;
+		private String cmntUserName;
 		
-		private String comment;
+		private String cmnt;
 		
-		private LocalDate commentedAt;
+		private LocalDateTime commentedAt;
 		
-		public int getCommentId(){
-			return commentId;
-		}
-		
-		public void setCommentId(){
-			
-		}
-		
-		public int getCommenterId(){
-			return commenterId;
-		}
-		
-		public void setCommenterId(int commenterId){
-			this.commenterId = commenterId;
+		public Comment(Integer postId, String postedUserName, String cmntUserName, String cmnt) {
+			this.cmntId = cmntCounter++;
+			this.postId = postId;
+			this.postedUserName = postedUserName;
+			this.cmntUserName = cmntUserName;
+			this.cmnt = cmnt;
+			this.commentedAt = LocalDateTime.now();
 		}
 
-		public int getPostId(){
+		public Integer getCommentId(){
+			return cmntId;
+		}
+
+		public String getpostedUserName(){
+			return postedUserName;
+		}
+		
+		public String getCmntUserName(){
+			return cmntUserName;
+		}
+
+		public Integer getPostId(){
 			return postId;
 		}
 		
-		public void setPostId(int postId){
-			this.postId = postId;
-		}
-		
 		public String getComment(){
-			return comment;
+			return cmnt;
 		}
 		
-		public void setComment(String comment){
-			this.comment = comment;
-		}
-		
-		public LocalDate geCommentedAt(){
+		public LocalDateTime geCommentedAt(){
 			return commentedAt;
 		}
-		
-		public void setCommentdAt(LocalDate commentedAt){
-			this.commentedAt = commentedAt;
+
+		public String toString() {
+			return cmntUserName + "\n  " + cmnt;
 		}
 		
 }

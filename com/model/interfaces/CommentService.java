@@ -1,15 +1,14 @@
 package com.model.interfaces;
 
-import java.util.Collection;
-
 import com.model.models.Comment;
+import com.model.models.Post;
 
-interface CommentService{
+public interface CommentService{
 	
-	boolean add(Comment comment);
+	void add(Comment comment);
 	
-	boolean delete(int commentedUserId, int postId, int commentId);
+	void delete(Comment comment);
 	
-	Collection<Comment> get(int postId);
+	void get(Post post);
 	
 }

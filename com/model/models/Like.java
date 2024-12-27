@@ -1,47 +1,58 @@
 package com.model.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public  class Like{
+
+	private static int likeCounter = 100;
+
+	private final int likeId;
 	
-	private int likeId;
+	private String userName;
+
+	private String pUserName;
+
+	private Post post;
+
+	private Integer postId;
 	
-	private int userId;
+	private LocalDateTime likedAt;
 	
-	private int postId;
-	
-	private LocalDate likedAt;
+	public Like(String userName, String pUserName, Integer postId) {
+		likeId = likeCounter++;
+		this.userName = userName;
+		this.pUserName = pUserName;
+		this.postId = postId;
+		this.likedAt = LocalDateTime.now();
+	}
 	
 	public int getLikeId(){
 		return likeId;
 	}
-	
-	public void setLikeId(){
-		
+
+	public String getUserName(){
+		return userName;
+	}
+
+	public String getPostUserName(){
+		return pUserName;
 	}
 	
-	public int getUserId(){
-		return userId;
-	}
-	
-	public void setUserId(int userId){
-		this.userId = userId;
-	}
-	
-	public int getPostId(){
+	public Integer getPostId(){
 		return postId;
 	}
 	
-	public void setPostId(int postId){
-		this.postId = postId;
-	}
-	
-	public LocalDate getLikedAt(){
+	public LocalDateTime getLikedAt(){
 		return likedAt;
 	}
 	
-	public void setLikedAt(LocalDate likedAt){
-		this.likedAt = likedAt;
+	public int getLikesCount(){
+		return post.getLikes().size();
 	}
+
 	
+	public String toString() {
+		return " Username : "+ userName +", LikeId" + likeId + ", LikedAt : "+likedAt+"\n";
+	}
+
 }
