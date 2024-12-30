@@ -1,9 +1,11 @@
-package com.model.interfaces;
-import com.model.models.User;
+package com.instagram.service;
+import com.instagram.model.User;
 
 public interface UserService{
 	
 	void login(String userName, String password);
+	
+	void logout(String userName, String password);
 	
 	void createAccount(User user);
 	

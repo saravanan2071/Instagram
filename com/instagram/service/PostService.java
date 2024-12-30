@@ -1,14 +1,14 @@
-package com.model.interfaces;
+package com.instagram.service;
 
 import java.util.Map;
 
-import com.model.models.Post;
+import com.instagram.model.Post;
 
 public interface PostService{
 	
 	void post(Post post);
 	
-	void delete(String userName, Integer postId);
+	void delete(Post post);
 	
 	void delete(String userName);
 	

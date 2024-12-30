@@ -1,8 +1,10 @@
-package com.model.models;
+package com.instagram.model;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.*;
+import java.util.HashMap;
 
 public class Post{
 
@@ -16,9 +18,9 @@ public class Post{
 
 	private String caption;
 	
-	private Set<Like> likes = new HashSet<>();
+	private Set<Like> likes;
 	
-	private Map<Integer, Comment> comments = new HashMap<>();
+	private Map<Integer, Comment> comments;
 	
 	private LocalDateTime postedAt;
 	
@@ -26,6 +28,8 @@ public class Post{
 		this.userName = userName;
 		this.imageUrl = imageUrl;
 		this.caption = caption;
+		likes = new HashSet<>(); 
+		comments = new HashMap<>();
 		this.postedAt = LocalDateTime.now();
 		postId = postCounter++;
 	}

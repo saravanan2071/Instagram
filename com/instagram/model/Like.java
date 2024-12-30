@@ -1,4 +1,4 @@
-package com.model.models;
+package com.instagram.model;
 
 import java.time.LocalDateTime;
 
@@ -8,9 +8,9 @@ public  class Like{
 
 	private final int likeId;
 	
-	private String userName;
+	private String likerUsername;
 
-	private String pUserName;
+	private String uploaderUsername;
 
 	private Post post;
 
@@ -18,10 +18,10 @@ public  class Like{
 	
 	private LocalDateTime likedAt;
 	
-	public Like(String userName, String pUserName, Integer postId) {
+	public Like(String likerUsername, String uploaderUsername, Integer postId) {
 		likeId = likeCounter++;
-		this.userName = userName;
-		this.pUserName = pUserName;
+		this.likerUsername = likerUsername;
+		this.uploaderUsername = uploaderUsername;
 		this.postId = postId;
 		this.likedAt = LocalDateTime.now();
 	}
@@ -31,11 +31,11 @@ public  class Like{
 	}
 
 	public String getUserName(){
-		return userName;
+		return likerUsername;
 	}
 
 	public String getPostUserName(){
-		return pUserName;
+		return uploaderUsername;
 	}
 	
 	public Integer getPostId(){
@@ -52,7 +52,7 @@ public  class Like{
 
 	
 	public String toString() {
-		return " Username : "+ userName +", LikeId" + likeId + ", LikedAt : "+likedAt+"\n";
+		return " likerUsername : "+ likerUsername +", LikeId" + likeId + ", LikedAt : "+likedAt+"\n";
 	}
 
 }

@@ -1,10 +1,7 @@
-package com.model.models;
+package com.instagram.model;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
-import com.enums.Gender;
 
 
 public  class User{
@@ -23,25 +20,9 @@ public  class User{
 	
 	private Gender gender;
 	
-	private Map<Integer, Post> post = new HashMap<>();
-	
-	
-	public int hashCode() {
-		return Objects.hash(email, phoneNumber, userName);
-	}
+	private Map<Integer, Post> post;
 
-	
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		User other = (User) obj;
-		return Objects.equals(email, other.email) && Objects.equals(phoneNumber, other.phoneNumber)
-				&& Objects.equals(userName, other.userName);
-	}
-	
-	
+
 	public User(String name, String phoneNumber, String email, LocalDate dateOfBirth, String userName, String password, Gender gender) {
 					
 		this.name = name;
@@ -57,6 +38,8 @@ public  class User{
 		this.password = password;
 		
 		this.gender = gender;
+
+		post = new HashMap<>();
 	}
 	
 	public String getName(){
@@ -126,6 +109,24 @@ public  class User{
 	public void setPost(Integer postId, Post p){
 		post.put(postId, p);
 	}
+
+	public boolean equals(Object obj)
+	{
+		if(obj == null){
+			return false;
+		}
+		if(obj.getClass() != this.getClass()){
+			return false;
+		}
+		User user = (User)obj;
+		
+		return user.userName.equals(this.userName) || user.email.equals(this.email) || user.phoneNumber.equals(this.phoneNumber);
+	}
+
+	public int hashCode(){
+		return userName.hashCode() + email.hashCode() + phoneNumber.hashCode();
+	}
+	
 	
 	public String toString() {
 		

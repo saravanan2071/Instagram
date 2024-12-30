@@ -1,7 +1,7 @@
-package com.model.interfaces;
+package com.instagram.service;
 
-import com.model.models.Comment;
-import com.model.models.Post;
+import com.instagram.model.Comment;
+import com.instagram.model.Post;
 
 public interface CommentService{
 	

@@ -1,4 +1,4 @@
-package com.model.models;
+package com.instagram.model;
 
 import java.time.LocalDateTime;
 
