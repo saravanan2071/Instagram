@@ -4,24 +4,24 @@ import java.time.LocalDateTime;
 
 public  class Like{
 
-	private static int likeCounter = 100;
+	private static int likeIDCounter = 100;
 
 	private final int likeId;
 	
-	private String likerUsername;
+	private int likerUserID;
 
-	private String uploaderUsername;
+	private int uploaderUserID;
 
 	private Post post;
 
-	private Integer postId;
+	private int postId;
 	
 	private LocalDateTime likedAt;
 	
-	public Like(String likerUsername, String uploaderUsername, Integer postId) {
-		likeId = likeCounter++;
-		this.likerUsername = likerUsername;
-		this.uploaderUsername = uploaderUsername;
+	public Like(int uploaderUserID,int likerUserID, int postId) {
+		likeId = likeIDCounter++;
+		this.likerUserID = likerUserID;
+		this.uploaderUserID = uploaderUserID;
 		this.postId = postId;
 		this.likedAt = LocalDateTime.now();
 	}
@@ -30,15 +30,15 @@ public  class Like{
 		return likeId;
 	}
 
-	public String getUserName(){
-		return likerUsername;
+	public int getLikerUserID(){
+		return likerUserID;
 	}
 
-	public String getPostUserName(){
-		return uploaderUsername;
+	public int getUploaderUserID(){
+		return uploaderUserID;
 	}
 	
-	public Integer getPostId(){
+	public int getPostId(){
 		return postId;
 	}
 	
@@ -46,13 +46,14 @@ public  class Like{
 		return likedAt;
 	}
 	
+
 	public int getLikesCount(){
 		return post.getLikes().size();
 	}
 
 	
 	public String toString() {
-		return " likerUsername : "+ likerUsername +", LikeId" + likeId + ", LikedAt : "+likedAt+"\n";
+		return " likerUsername : "+ likerUserID +", LikeId" + likeId + ", LikedAt : "+likedAt+"\n";
 	}
 
 }

@@ -1,16 +1,18 @@
 package com.instagram.service;
 import com.instagram.model.User;
 
-public interface UserService{
+public interface UserService {
 	
-	void login(String userName, String password);
+	void login(int userID, String password);
 	
-	void logout(String userName, String password);
+	void logout(int userID, String password);
 	
 	void createAccount(User user);
 	
-	void deletUser(String userName, String password);
+	void deletUser(int userID, String password);
 	
-	boolean getUserSession(String userName);
+	boolean getUserSession(int userID);
+
+	boolean isUserExist(final int userID);
 	
 }

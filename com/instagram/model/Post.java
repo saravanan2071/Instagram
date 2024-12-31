@@ -10,6 +10,8 @@ public class Post{
 
 	private static int postCounter = 100;
 
+	private int userID;
+
 	private final int postId;
 	
 	private String userName;
@@ -24,14 +26,21 @@ public class Post{
 	
 	private LocalDateTime postedAt;
 	
-	public Post(String userName, String imageUrl, String caption) {
+	public Post(String userName, int userID, String imageUrl, String caption) {
 		this.userName = userName;
+		this.userID = userID;
 		this.imageUrl = imageUrl;
 		this.caption = caption;
 		likes = new HashSet<>(); 
 		comments = new HashMap<>();
 		this.postedAt = LocalDateTime.now();
 		postId = postCounter++;
+	}
+
+	
+
+	public int getUserID(){
+		return userID;
 	}
 	
 	public int getPostId(){
@@ -70,7 +79,7 @@ public class Post{
 		return comments;
 	}
 	
-	public void setComments(Integer commentId, Comment c){
+	public void setComments(int commentId, Comment c){
 		comments.put(commentId, c);
 	}
 	

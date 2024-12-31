@@ -32,42 +32,72 @@ public class InstagramApplication {
 
 		CommentService commentService = new CommentServiceImpl(userService, storageService);
 		
-		User u1 = new User("Zoro", "+91 7846352748", "piratehunter@gmail.com", LocalDate.of(2001, 04, 24), "roronoa_zoro", "zoro@piratehunter", Gender.MALE);
+		User u1 = new User("Zoro", "+91 7846352748", "piratehunter@gmail.com",
+		 LocalDate.of(2001, 04, 24), "roronoa_zoro", "zoro@piratehunter", Gender.MALE);
 		userService.createAccount(u1);
 		
-		User u2 = new User("Luffy", "+91 7846352749", "mokeydluffy@gmail.com", LocalDate.of(2003, 06, 4), "mokey.D.luffy", "luffy@34", Gender.MALE);
+		User u2 = new User("Luffy", "+91 7846352749", "mokeydluffy@gmail.com",
+		 LocalDate.of(2003, 06, 4), "monkey.D.luffy", "luffy@34", Gender.MALE);
 		userService.createAccount(u2);
 		
-		User u3 = new User("sanji", "+91 9788466355", "vinsmokesanji@gmail.com", LocalDate.of(2001, 07, 16), "black_leg_sanji", "sanji#cook", Gender.MALE);
+		User u3 = new User("sanji", "+91 9788466355", "vinsmokesanji@gmail.com",
+		 LocalDate.of(2001, 07, 16), "black_leg_sanji", "sanji#cook", Gender.MALE);
 		userService.createAccount(u3);
 		
-		User u4 = new User("usopp", "+91 9986566355", "usopp@gmail.com", LocalDate.of(2003, 10, 23), "god_D_usopp", "longnose@gmail.com", Gender.MALE);
+		User u4 = new User("usopp", "+91 9986566355", "usopp@gmail.com",
+		 LocalDate.of(2003, 10, 23), "god_D_usopp", "longnose@gmail.com", Gender.MALE);
 		userService.createAccount(u4);
 		System.out.println();
-		User u5 = new User("sanji", "+91 9788466355", "sanji@gmail.com", LocalDate.of(2001, 07, 16), "sanji", "cook@gmail.com", Gender.MALE);
+		User u5 = new User("sanji", "+91 9788466355", "sanji@gmail.com",
+		 LocalDate.of(2001, 07, 16), "sanji", "cook@gmail.com", Gender.MALE);
 		userService.createAccount(u5);
+		System.out.println();
 
 
-		userService.login("black_leg_sanji", "sanji#cook");
+		userService.login(202503, "sanji#cook");
 		
-		userService.login("mokey.D.luffy", "luffy@34");
+		userService.login(202502, "luffy@34");
 		
-		userService.login("roronoa_zoro", "zoro@piratehunter");
+		userService.login(202501, "zoro@piratehunter");
 		
-		//us.deletUser("roronoa_zoro", "zoro@piratehunter");
-
-		Post p1 = new Post("roronoa_zoro", "zoro.img", "PIRATE HUNTER ZORO.....");
+		System.out.println();
+		
+		userService.deletUser(202500, "zoro@piratehunter");
+		
+		Post p1 = new Post("roronoa_zoro", 202501, "zoro.img", "Pirate Hunter Zoro");
 		postService.post(p1);
 
-		Post p2 = new Post("roronoa_zoro", "roronoa.img", "Kaizoku hantazoro.....");
+		Post p2 = new Post("roronoa_zoro",202501,  "roronoa.img", "Kaizoku hantazoro.....");
 		postService.post(p2);
 
-		Post p3 = new Post("black_leg_sanji", "sanji.img", "cheff");
+		Post p3 = new Post("black_leg_sanji",202503,  "sanji.img", "cheff");
 		postService.post(p3);
 
-		System.out.println(storageService.get());
+
 		
+		Like like1 = new Like(202503, 202502, 102);
+		likeService.like(like1);
+
+		System.out.println();
+		Comment c1 = new Comment(102, 202503, 202502, "SANJI...........");
+		commentService.add(c1);
+
+		System.out.println();
+
+		//userService.logout(202502, "luffy@34");
 		
+		Like like2 = new Like(202501, 202502, 100);
+		likeService.like(like2);
+
+		// commentService.delete(c1);
+		// likeService.dislike(like2);
+
+		System.out.println(likeService.get(p1));
+		System.out.println(commentService.get(p3));
+
+		//userService.deletUser(202501, "zoro@piratehunter");
+		userService.login(202501, "zoro@piratehunter");
+		System.out.println(storageService.get(202501));
 	}
 
 }

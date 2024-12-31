@@ -4,14 +4,14 @@ import java.util.Map;
 
 import com.instagram.model.Post;
 
-public interface PostService{
+public interface PostService {
 	
 	void post(Post post);
 	
 	void delete(Post post);
 	
-	void delete(String userName);
+	void delete(int userID);
 	
-	Map<Integer, Post> get(String userName);
+	Map<Integer, Post> get(int userID);
 	
 }

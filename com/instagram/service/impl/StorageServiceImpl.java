@@ -8,32 +8,43 @@ import java.util.Map.Entry;
 import com.instagram.model.User;
 import com.instagram.service.StorageService;
 
-public class StorageServiceImpl implements StorageService{
+public class StorageServiceImpl implements StorageService {
 
-	public static Map<Integer, User> users = new HashMap<>();
+	private static Map<Integer, User> users = new HashMap<>();
 
 	@Override
-	public User get(Integer userID) 
-	{		
+	public User get(final int userID) {
+
 		return users.get(userID);
+
 	}
 
 	@Override
-	public Set<Entry<Integer, User>> get()
-	{
+	public Set<Entry<Integer, User>> get() {
+
 		return users.entrySet();
+	
 	}
 	
 	@Override
-	public void set(Integer userID, User u)
-	{
+	public void set(final int userID, final User u) {
+
 		users.put(userID, u);
+	
 	}
 
 	@Override
-	public void delete(Integer userID)
-	{
+	public void delete(final int userID) {
+
 		users.remove(userID);
+	
+	}
+
+	@Override
+	public Map<Integer, User> getUsers() {
+		
+		return users;
+	
 	}
 
 }

@@ -7,175 +7,156 @@ import com.instagram.model.User;
 import com.instagram.service.StorageService;
 import com.instagram.service.UserService;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	private StorageService storageService;
-	private static Map<String, Boolean> userSession;
-	private Integer userID;
+	private static Map<Integer, Boolean> userSession;
 	
-	public UserServiceImpl(StorageService storageService)
-	{
+	public UserServiceImpl(StorageService storageService) {
+
 		this.storageService = storageService;
 		userSession = new HashMap<>();
+
 	}
 	
-	// Logic for User Login 
-	@Override
-	public void login(final String userName, final String password) {
-		
-			// checking whether the username and password is not null
-			if(userName != null && password != null)
-			{
-				final Integer userId = getUserId(userName);
-				final User user = storageService.get(userId);
 
-				if (user!= null && user.getUserName().equals(userName) && user.getPassword().equals(password)) 
-				{
-					System.out.println("Login successfull");
-					System.out.println("-----------------");
-					System.out.println(storageService.get(userId));
-					System.out.println();
+	@Override
+	public void login(final int userID, final String password) {
+
+		if (getUserSession(userID)) {
+
+			System.out.println("You are already logged in");
+			return;		
+
+		}
+		
+		if (isUserExist(userID) && password != null) {
+			
+			final User user = storageService.get(userID);
+
+			if (user.getPassword().equals(password)) {
+
+				System.out.println("Login successfull");
+				System.out.println("-----------------");
+				System.out.println(storageService.get(userID));
+				System.out.println();
 					
-					// update the usersession is true to access the other features
-					userSession.put(userName, true);
-				}
-				else 
-				{
-					System.out.println("Invalid credentials. Please check your username and password.");
+				// update the usersession is true to access the other features
+				userSession.put(userID, true);
 
-					// update the usersession is false to avoid access to other features, when the credentials are Invalid
-					userSession.put(userName, false);
-				}
 			}
+
+			else {
+
+				System.out.println("Invalid credentials. Please check your userID and password.");
+
+				// update the usersession is false to avoid access to other features, when the credentials are Invalid
+				userSession.put(userID, false);
+
+			}
+		}
+
+		else {
+
+			System.out.println("user does not exist...");
+
+		}
 		
 	}
 
 	@Override
-	public void logout(final String userName, final String password)
-	{
-		if (getUserSession(userName))
-		{
-			userSession.put(userName, false);	
-			System.out.println("Logout successful. See you again, " + userName + "!");
+	public void logout(final int userID, final String password) {
+
+		if (getUserSession(userID)) {
+
+			userSession.put(userID, false);	
+			System.out.println("Logout successful. See you again, " + userID + "!");
+
 		}
-		else{
-			System.out.println("You are already logged out, " + userName + ".");
+
+		else {
+
+			System.out.println("You are already logged out, " + userID + ".");
+
 		}
 	}
 	
-	// Logic for Create a new Account 
+	
 	@Override
-	public void createAccount(final User user) 
-	{
+	public void createAccount(final User user) {
+
 		boolean isEqual = false;
 
-		for(final Map.Entry<Integer, User> entry : storageService.get())
-		{
-			if (user.equals(entry.getValue())) 
-			{
+		// iterate through the Users map to check the dupilcate user details
+		for (final Map.Entry<Integer, User> entry : storageService.get()) {
+
+			if (user.equals(entry.getValue())) {
+
 				System.out.println("Account creation failed. A user with the same details already exists.");
 				isEqual = true;
 				return;	
+
 			}
 		}
 
-		if (user != null || !isEqual) 
-		{
-			userID = user.getUserName().hashCode() + user.getEmail().hashCode();
-			storageService.set(userID, user);
-			userID++;
-			System.out.println("Account created successfully for username: " + user.getUserName() + ".");
+		if (user != null || !isEqual) {
+			
+			storageService.set(user.getUserID(), user);
+			user.setUserID();
+			System.out.println("Account created successfully for userID: " + user.getUserID() + ".");
+
 		}
-		else
-		{
+
+		else {
+
 			System.err.println("Account creation failed. Invalid user data provided.");
+
 		}
 
 	}
 
-	// Logic for Delete Account 
+
 	@Override
-	public void deletUser(String userName, String password) 
-	{	
+	public void deletUser(final int userID, final String password) {	
 
-		String un = "";
-		String pswd = "";
-		Integer k = 0;
+		if (isUserExist(userID) && getUserSession(userID)) {
 
-		//  check the usersession	
-		if(getUserSession(userName)){
-            for(Map.Entry<Integer, User> e : storageService.get()) 
-		    {
-			    User u = e.getValue();
+			final User user = storageService.get(userID);
 			
-			    if(u.getUserName().equals(userName) && u.getPassword().equals(password))
-			    {   
+			if (user.getPassword().equals(password)) {
 
-                    un = u.getUserName();
-                    pswd = u.getPassword();
-                    k = e.getKey();
-			    }
-		    }
-			
-			// validate the credentials
-            if(un.equals(userName) && pswd.equals(password)) 
-            {
-                storageService.delete(k);
-                System.out.println("Account deleted successfully for username: " + un + ".");
-            }
+				storageService.delete(userID);
+                System.out.println("Account deleted successfully for userID: " + userID + ".");
 
-            else 
-            {
-                System.out.println("Account deletion failed. Invalid username or password.");
-            }
-        }
+			}
 
-        else
-        {
-            System.out.println("Account deletion failed. You are not logged in, " + userName + ".");
-        }
+			else {
+				System.out.println("Account deletion failed. Invalid password.");
+
+			}
+		}
+
+        else {
+            System.out.println("Account deletion failed. You are not logged in or user does not exist, " + userID + ".");
+        
+		}
 		
 	}
 
-	// Logic for Tracking User Session
+	// for track User Session
 	@Override
-	public boolean getUserSession(String userName)
-	{	
-		return userSession.getOrDefault(userName, false);
+	public boolean getUserSession(final int userID) {
+
+		return userSession.getOrDefault(userID, false);
+
 	}
+	
+    // for check the existence of an user
+	@Override
+    public boolean isUserExist(final int userID) {
 
-
-	// to the user using username
-	public User getUser(String userName)
-	{
-		User user = null;
-
-		for(final Map.Entry<Integer, User> entry : storageService.get())
-		{
-			User user1 = entry.getValue();
-			if(user.getUserName().equals(userName))
-			{
-				user =  user1;
-			}
-		}
-
-		return user;
-	}
-
-
-	// to get the userID using username
-	public Integer getUserId(String userName)
-	{
-		Integer userId = null;
-		for(final Map.Entry<Integer, User> entry : storageService.get())
-		{
-			User user = entry.getValue();
-			if(user.getUserName().equals(userName))
-			{
-				userId = entry.getKey();
-			}
-		}
-		return userId;
-	}
-
+        return storageService.getUsers().containsKey(userID);
+		
+    }
+	
 }

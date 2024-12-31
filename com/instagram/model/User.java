@@ -5,6 +5,8 @@ import java.util.Map;
 
 
 public  class User{
+
+	private static int userID = 202501;
 	
 	private String name;
 	
@@ -40,6 +42,15 @@ public  class User{
 		this.gender = gender;
 
 		post = new HashMap<>();
+		
+	}
+
+	public int getUserID(){
+		return userID;
+	}
+
+	public void setUserID(){
+		userID++;
 	}
 	
 	public String getName(){

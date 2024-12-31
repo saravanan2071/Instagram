@@ -1,14 +1,16 @@
 package com.instagram.service;
 
+import java.util.Map;
+
 import com.instagram.model.Comment;
 import com.instagram.model.Post;
 
-public interface CommentService{
+public interface CommentService {
 	
 	void add(Comment comment);
 	
 	void delete(Comment comment);
 	
-	void get(Post post);
+	Map<Integer, Comment> get(Post post);
 	
 }

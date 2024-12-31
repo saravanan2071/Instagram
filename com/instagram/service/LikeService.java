@@ -5,7 +5,7 @@ import java.util.Set;
 import com.instagram.model.Like;
 import com.instagram.model.Post;
 
-public interface LikeService{
+public interface LikeService {
 
 	void like(Like like);
 	

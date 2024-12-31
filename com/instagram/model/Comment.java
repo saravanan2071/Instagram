@@ -6,42 +6,42 @@ public class Comment{
 
 		// cmnt = comment
 
-		private static Integer cmntCounter = 200;
+		private static int cmntCounter = 200;
 
-		private final Integer cmntId;
+		private final int cmntId;
 		
-		private Integer postId;
+		private int postId;
 
-		private String postedUserName;
+		private int postedUserID;
 		
-		private String cmntUserName;
+		private int commentedUserID;
 		
 		private String cmnt;
 		
 		private LocalDateTime commentedAt;
 		
-		public Comment(Integer postId, String postedUserName, String cmntUserName, String cmnt) {
+		public Comment(int postId, int postedUserID, int commentedUserID, String cmnt) {
 			this.cmntId = cmntCounter++;
 			this.postId = postId;
-			this.postedUserName = postedUserName;
-			this.cmntUserName = cmntUserName;
+			this.postedUserID = postedUserID;
+			this.commentedUserID = commentedUserID;
 			this.cmnt = cmnt;
 			this.commentedAt = LocalDateTime.now();
 		}
 
-		public Integer getCommentId(){
+		public int getCommentId(){
 			return cmntId;
 		}
 
-		public String getpostedUserName(){
-			return postedUserName;
+		public int getPostedUserID(){
+			return postedUserID;
 		}
 		
-		public String getCmntUserName(){
-			return cmntUserName;
+		public int getCmntUserID(){
+			return commentedUserID;
 		}
 
-		public Integer getPostId(){
+		public int getPostId(){
 			return postId;
 		}
 		
@@ -54,7 +54,7 @@ public class Comment{
 		}
 
 		public String toString() {
-			return cmntUserName + "\n  " + cmnt;
+			return commentedUserID + "\n  " + cmnt;
 		}
 		
 }
