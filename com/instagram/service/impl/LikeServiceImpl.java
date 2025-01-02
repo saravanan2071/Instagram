@@ -7,17 +7,17 @@ import com.instagram.model.Post;
 import com.instagram.model.User;
 import com.instagram.service.LikeService;
 import com.instagram.service.StorageService;
-import com.instagram.service.UserService;
+import com.instagram.service.UserValidator;
 
 public class LikeServiceImpl implements LikeService {
     
-    private UserService userService;
     private StorageService storageService;
+    private UserValidator userValidator;
 
-    public LikeServiceImpl(UserService userService, StorageService storageService) {
+    public LikeServiceImpl(StorageService storageService, UserValidator userValidator) {
 
-        this.userService = userService; 
         this.storageService = storageService;
+        this.userValidator = userValidator;
 
     }
 
@@ -25,8 +25,8 @@ public class LikeServiceImpl implements LikeService {
     public void like(final Like like) {
 
         // validate whether the post user and the liked user existence and check the liked user session
-        if (userService.isUserExist(like.getUploaderUserID()) && userService.isUserExist(like.getLikerUserID())
-             && userService.getUserSession(like.getLikerUserID())) {
+        if (userValidator.isUserExist(like.getUploaderUserID()) && userValidator.isUserExist(like.getLikerUserID())
+             && userValidator.getUserSession(like.getLikerUserID())) {
 
             final User user = storageService.get(like.getUploaderUserID());
 
@@ -58,7 +58,7 @@ public class LikeServiceImpl implements LikeService {
     @Override    
     public void dislike(final Like like)  {
 
-        if (userService.getUserSession(like.getLikerUserID())) {
+        if (userValidator.getUserSession(like.getLikerUserID())) {
 
             final Post post = storageService.get(like.getUploaderUserID()).getPost(like.getPostId());
             post.getLikes().remove(like);

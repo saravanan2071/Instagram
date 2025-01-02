@@ -43,7 +43,7 @@ public class StorageServiceImpl implements StorageService {
 	@Override
 	public Map<Integer, User> getUsers() {
 		
-		return users;
+		return new HashMap<>(users);
 	
 	}
 

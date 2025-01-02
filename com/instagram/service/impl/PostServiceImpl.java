@@ -7,17 +7,17 @@ import com.instagram.model.Post;
 import com.instagram.model.User;
 import com.instagram.service.PostService;
 import com.instagram.service.StorageService;
-import com.instagram.service.UserService;
+import com.instagram.service.UserValidator;
 
 public class PostServiceImpl implements PostService {
 
-    private UserService userService;
     private StorageService storageService;
+    private UserValidator userValidator;
 
-    public PostServiceImpl(UserService userService, StorageService storageService) {
+    public PostServiceImpl(StorageService storageService, UserValidator userValidator) {
 
-        this.userService = userService;
         this.storageService = storageService;
+        this.userValidator = userValidator;
 
     }
     
@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService {
 
         }
 
-        if (userService.isUserExist(post.getUserID()) && userService.getUserSession(post.getUserID())) {
+        if (userValidator.isUserExist(post.getUserID()) && userValidator.getUserSession(post.getUserID())) {
 
             final User user = storageService.get(post.getUserID());
             user.setPost(post.getPostId(), post);
@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(final Post post) {
 
-        if (userService.isUserExist(post.getUserID()) && userService.getUserSession(post.getUserID())) {
+        if (userValidator.isUserExist(post.getUserID()) && userValidator.getUserSession(post.getUserID())) {
 
             final User user = storageService.get(post.getUserID());
             
@@ -74,7 +74,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(final int userID) {
 
-        if (userService.isUserExist(userID) && userService.getUserSession(userID)) {
+        if (userValidator.isUserExist(userID) && userValidator.getUserSession(userID)) {
 
             final User user = storageService.get(userID);
 
@@ -95,7 +95,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Map<Integer, Post> get(final int userID) {
 
-        if (userService.isUserExist(userID)) {
+        if (userValidator.isUserExist(userID)) {
 
             final User user = storageService.get(userID);
             return user.getPost();
