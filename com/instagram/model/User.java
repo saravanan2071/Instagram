@@ -135,7 +135,13 @@ public  class User{
 	}
 
 	public int hashCode(){
-		return userName.hashCode() + email.hashCode() + phoneNumber.hashCode();
+		int prime = 31;
+		int result = 1;
+		result = prime * result + ((userName == null) ? 0 : name.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+		return result;
+		//return userName.hashCode() + email.hashCode() + phoneNumber.hashCode();
 	}
 	
 	

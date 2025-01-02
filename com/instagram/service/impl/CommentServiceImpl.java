@@ -6,17 +6,17 @@ import com.instagram.model.Comment;
 import com.instagram.model.Post;
 import com.instagram.service.CommentService;
 import com.instagram.service.StorageService;
-import com.instagram.service.UserService;
+import com.instagram.service.UserValidator;
 
 public class CommentServiceImpl implements CommentService {
-
-    private UserService userService;
+    
     private StorageService storageService;
+    private UserValidator userValidator;
 
-    public CommentServiceImpl(UserService userService, StorageService storageService) {
+    public CommentServiceImpl(StorageService storageService, UserValidator userValidator) {
 
-        this.userService = userService;
         this.storageService = storageService;
+        this.userValidator = userValidator;
 
     }
     
@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
         }
 
         // validate the existence of both the posted user and commented user and the commented user login session
-        if (userService.isUserExist(comment.getPostedUserID()) && userService.isUserExist(comment.getCmntUserID()) && userService.getUserSession(comment.getCmntUserID())){
+        if (userValidator.isUserExist(comment.getPostedUserID()) && userValidator.isUserExist(comment.getCmntUserID()) && userValidator.getUserSession(comment.getCmntUserID())){
 
             final Post post = storageService.get(comment.getPostedUserID()).getPost(comment.getPostId());
 
@@ -70,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
         
         }
 
-        if (userService.getUserSession(comment.getCmntUserID())) {
+        if (userValidator.getUserSession(comment.getCmntUserID())) {
 
             // to get the comments of the post
             final Map<Integer, Comment> mapStorage = storageService.getUsers().get(comment.getPostedUserID()).getPost(comment.getPostId()).getComments();  
